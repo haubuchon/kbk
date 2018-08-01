@@ -1,0 +1,34 @@
+
+<h1>{{artist}}</h1>
+<div fxLayout="row">
+
+  <mat-form-field fxFlex="200px">
+      <input matInput placeholder="Artist" [(ngModel)]="artist" >
+  </mat-form-field>
+  <button mat-button (click)="onClick()" >Get songs</button>
+</div>
+
+<mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" >
+  
+  <ng-container matColumnDef="artist">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Artist </th>
+    <td mat-cell *matCellDef="let songs"> {{songs.artist}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="language">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+    <td mat-cell *matCellDef="let songs"> {{songs.language}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+    <td mat-cell *matCellDef="let songs"> {{songs.title}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
